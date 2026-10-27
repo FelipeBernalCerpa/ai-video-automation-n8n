@@ -1,0 +1,1280 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Your content sheet",
+          "cachedResultUrl": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "estado",
+              "lookupValue": "pendiente"
+            },
+            {
+              "lookupColumn": "pilar",
+              "lookupValue": "={{ $json.pilar }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -3040,
+        1136
+      ],
+      "id": "b285fc32-6177-476d-a81e-aa1ecc077ddf",
+      "name": "Google Sheets",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_ME",
+          "name": "Your googleSheetsOAuth2Api"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "numberOfItems": 5
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserItemList",
+      "typeVersion": 1,
+      "position": [
+        -2608,
+        1680
+      ],
+      "id": "458ebdac-e78f-4148-abd5-72dbdd87c1ea",
+      "name": "Item List Output Parser"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Your content sheet",
+          "cachedResultUrl": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Google Sheets').first().json.id }}",
+            "publishing": "done",
+            "final_output": "=https://youtube.com/watch?v={{ $('Upload a video').item.json.id }}",
+            "estado": "publicado"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "idea",
+              "displayName": "idea",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "caption",
+              "displayName": "caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "production",
+              "displayName": "production",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "environment_prompt",
+              "displayName": "environment_prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "publishing",
+              "displayName": "publishing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "final_output",
+              "displayName": "final_output",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "pilar",
+              "displayName": "pilar",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "estado",
+              "displayName": "estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2080,
+        1376
+      ],
+      "id": "5cb898b1-e3dc-4cda-8e76-0598b9315751",
+      "name": "Update Gsheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_ME",
+          "name": "Your googleSheetsOAuth2Api"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 6
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -3488,
+        1136
+      ],
+      "id": "7a501c53-a0c0-4ade-9c38-7956defaf60d",
+      "name": "DIsparador por horas"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.creatomate.com/v1/renders",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_CREATOMATE_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"source\": {\n    \"output_format\": \"mp4\",\n    \"width\": 1080,\n    \"height\": 1920,\n    \"elements\": [\n      {\n        \"type\": \"video\",\n        \"name\": \"avatar\",\n        \"source\": \"{{ $('Get a video').item.json.data.video_url }}\",\n        \"fit\": \"cover\"\n      },\n      {\n        \"type\": \"text\",\n        \"name\": \"subtitles\",\n        \"transcript_source\": \"avatar\",\n        \"transcript_effect\": \"karaoke\",\n        \"transcript_color\": \"#FFD700\",\n        \"transcript_split\": \"word\",\n        \"y\": \"80%\",\n        \"width\": \"88%\",\n        \"font_family\": \"Montserrat\",\n        \"font_weight\": \"800\",\n        \"font_size\": \"8.5 vmin\",\n        \"fill_color\": \"#FFFFFF\",\n        \"stroke_color\": \"#000000\",\n        \"stroke_width\": \"1.2 vmin\",\n        \"text_transform\": \"uppercase\"\n      }\n    ]\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        128,
+        1184
+      ],
+      "id": "544a6d41-af52-422c-9a36-0f70a0b71448",
+      "name": "Edit + Render Video",
+      "executeOnce": false,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        544,
+        1184
+      ],
+      "id": "bd7b479a-a35e-4215-ab66-5cd7dc584e81",
+      "name": "Wait2",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const pilares = {1:'noticias',2:'mitos',3:'ensenanza',4:'ia_aplicada',5:'negocios_salud',6:'viral',7:'mitos'};\nconst hoy = $now.weekday;\nconst pilarDelDia = pilares[hoy];\nconst fechaHoy = $now.toISODate();\nreturn [{json:{pilar: pilarDelDia, weekday: hoy, fecha: fechaHoy}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -3248,
+        1152
+      ],
+      "id": "0d810292-b84c-413f-a8c1-20f1b5734bd0",
+      "name": "Calcular Pilar del Dia"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Produce el contenido completo para el siguiente video, usando los datos de la fila del Google Sheet:\n\nProduce el contenido del video para esta fila del Sheet:\n\nID: {{ $('Google Sheets').first().json.id }}\nIdea / tema: {{ $('Google Sheets').first().json.idea }}\nPilar del día: {{ $('Calcular Pilar del Dia').first().json.pilar }}\nCaption / contexto previo: {{ $('Google Sheets').first().json.caption }}\n\nTEMAS YA PUBLICADOS (no repitas):\n{{ $('Temas publicados').all().map(i => i.json.idea).join('\\n') }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "Eres el ORQUESTADOR de un sistema automatizado de creación de contenido en video para redes sociales (shorts verticales) sobre inteligencia artificial. Tu trabajo es coordinar a tus herramientas (subagentes) para producir un paquete de contenido completo, veraz y con alta calidad, listo para producción.\n\n## IDENTIDAD DEL CANAL\nPersonalidad: informal pero seria, con mente crítica y criterio propio. No es un canal de niños ni de chismes. Cuestiona ideas comunes de la IA, desmiente mitos, expone afirmaciones e ideas falsas, y enseña cosas reales y útiles. El objetivo es construir autoridad y atraer clientes a futuro. Tono: directo, sin relleno, con personalidad, pero riguroso y honesto.\n\n## PILARES DE CONTENIDO\nCada video pertenece a un pilar (viene en el campo \"pilar\"):\n- noticias: novedades relevantes y recientes de IA.\n- mitos: desmentir creencias falsas o exponer gurús/ideas sin fundamento.\n- ensenanza: enseñar un concepto o habilidad de IA de forma simple.\n- ia_aplicada: casos prácticos de uso de IA (productividad, automatización, negocios).\n- negocios_salud: IA aplicada a negocios o al sector salud/médico.\n- viral: contenido de máximo gancho y curiosidad.\nAdapta el enfoque, el gancho y el tono al pilar correspondiente.\n\n## TUS HERRAMIENTAS (subagentes)\n1. \"Buscador de noticias/tendencias\": investiga temas recientes de IA en internet. \n2. \"Generador de títulos\": crea 3-5 títulos con gancho.\n3. \"Copywriter\": escribe el guion completo hablado.\n4. \"Generador de prompts visuales\": crea los prompts de b-roll/imágenes de apoyo.\n5. \"Revisor de calidad / fact-check\": verifica veracidad y calidad del guion antes de producir.\n\n## PROCESO QUE DEBES SEGUIR\n1. INVESTIGACIÓN (solo si el pilar es \"noticias\" o \"viral\", o si la idea es vaga y necesita contexto actual): usa \"Buscador de noticias/tendencias\" para definir o afinar el tema del día. Para pilares como \"mitos\", \"ensenanza\", \"ia_aplicada\" o \"negocios_salud\" donde ya hay una idea clara, puedes saltar este paso.\n2. TÍTULO: usa \"Generador de títulos\" con el tema y el pilar. Elige el mejor título de las opciones que devuelva (el de mayor gancho real, coherente con el pilar).\n3. GUION: usa \"Copywriter\" con el título elegido y el pilar para obtener el guion completo.\n4. FACT-CHECK: usa SIEMPRE \"Revisor de calidad / fact-check\" sobre el guion. Es OBLIGATORIO para los pilares \"mitos\", \"noticias\" y \"negocios_salud\". Si el veredicto es \"RECHAZADO\" o \"APROBADO CON CAMBIOS\", aplica las correcciones (puedes volver a llamar al Copywriter con las correcciones) antes de continuar. No continúes con un guion que el revisor rechazó.\n5. VISUALES: usa \"Generador de prompts visuales\" con el guion ya aprobado para obtener los prompts de b-roll.\n\n## REGLAS\n- No inventes datos, cifras ni declaraciones. Si el fact-check marca algo, corrígelo.\n- Máxima rigurosidad con temas médicos, de salud o dinero: nada de consejos peligrosos ni afirmaciones sin respaldo.\n- Mantén la personalidad del canal en todo el contenido.\n- Sé eficiente: no llames a una herramienta más veces de las necesarias.\n- Si una herramienta falla o devuelve algo inservible, intenta una vez más con mejor input; si sigue fallando, reporta el problema en tu salida.\n\n- descripcion_youtube: escribe una descripción atractiva para YouTube (NO solo el título): un gancho en la primera línea, 1-2 líneas de contexto del video, y termina con 3-5 hashtags relevantes (ej: #IA #InteligenciaArtificial #Shorts). \n- tags: genera 8-12 palabras clave relevantes al tema y al nicho de IA, separadas por coma.\n\n## FORMATO DE SALIDA FINAL\nDevuelve SIEMPRE un objeto con exactamente esta estructura:\n{\n  \"id\": \"el id de la fila\",\n  \"pilar\": \"el pilar\",\n  \"titulo_elegido\": \"el mejor título\",\n  \"titulos_alternativos\": [\"otros títulos generados\"],\n  \"guion\": \"el guion final aprobado, listo para locutar\",\n  \"prompts_visuales\": [\"prompt 1 en inglés\", \"prompt 2\", \"...\"],\n  \"fact_check\": {\n    \"veredicto\": \"APROBADO / APROBADO CON CAMBIOS / RECHAZADO\",\n    \"notas\": \"resumen de lo que verificó o corrigió\"\n  },\n  \"estado_sugerido\": \"listo_para_produccion\" \n}\n\"descripcion_youtube\": \"descripción optimizada para YouTube\",\n\"tags\": \"etiquetas separadas por coma\"\n\nTEMAS YA PUBLICADOS (no los repitas ni hagas algo casi igual):\n{{ $('Temas publicados').all().map(i => i.json.idea).join('\\n') }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -2592,
+        992
+      ],
+      "id": "04affbcf-12c6-4276-918b-5dbfaf766ac6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Genera entre 3 y 5 opciones de título corto y con gancho para un video short, según el tema y el pilar. Úsalo después de tener el tema definido. Devuelve títulos optimizados para retención y clics.",
+        "text": "Eres un experto en títulos virales para shorts verticales sobre inteligencia artificial. Personalidad: informal pero seria, con mente crítica, sin clickbait vacío ni títulos de niño.\n\nSegún el tema y el pilar que se te indiquen, genera entre 3 y 5 títulos cortos (menos de 60 caracteres), con gancho fuerte en los primeros 3 segundos, adaptados al pilar. Devuelve únicamente la lista de títulos, sin explicaciones ni comillas.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        -2752,
+        1504
+      ],
+      "id": "8d870245-8223-4fbd-b9ff-1b5b328bcfeb",
+      "name": "Generador de titulos"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Escribe el guion completo y hablado de un video short a partir del título y el pilar elegidos. Úsalo después de tener el título definido. Devuelve un guion listo para locutar, optimizado para retención en los primeros segundos.",
+        "text": "Eres un guionista experto en videos cortos (shorts verticales) para un canal sobre inteligencia artificial.\n\nPersonalidad del canal: informal pero seria, con mente crítica. Habla claro, directo, sin relleno ni lenguaje de niño. Cuestiona ideas comunes, desmiente mitos y expone lo falso cuando corresponde. El objetivo es que la gente aprenda algo real y perciba autoridad (eso atrae clientes a futuro).\n\nA partir del título y el pilar que recibas, escribe el guion COMPLETO para que lo locute un avatar hablando a cámara (primera persona, tono conversacional).\n\nEstructura obligatoria:\n1. GANCHO (primeros 3 segundos): una frase que pare el scroll. Pregunta fuerte, afirmación polémica o dato impactante. Nada de \"Hola, hoy les voy a hablar de...\".\n2. DESARROLLO: explica el tema de forma simple y con ritmo. Un punto lleva al siguiente. Sin tecnicismos innecesarios. Incluye el dato o argumento central que da valor.\n3. CIERRE: conclusión con punch (una idea que se quede en la cabeza) + un llamado a la acción natural (seguir, comentar, opinar). Nada forzado.\n\nReglas:\n- Duración objetivo: entre 30 y 60 segundos hablados (aprox. 80-150 palabras). Sé conciso.\n- Escribe solo lo que se va a decir en voz alta. Nada de acotaciones técnicas, ni \"[pausa]\", ni descripciones de escena.\n- Tono humano y con personalidad, no robótico.\n- Adapta el enfoque al pilar:\n  - noticias: cuenta qué pasó y por qué importa.\n  - mitos: plantea la creencia falsa y derríbala con argumento.\n  - ensenanza / ia_aplicada: enseña algo accionable paso a paso.\n  - negocios_salud: enfoque en resultado práctico o dinero.\n  - viral: máxima provocación y curiosidad.\n- Si el tema toca datos médicos o afirmaciones delicadas, sé riguroso: no inventes, no exageres.\n\nDevuelve únicamente el texto del guion, listo para locutar.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        -2480,
+        1520
+      ],
+      "id": "f03b7597-44da-43f7-87e1-12ec9692a3ad",
+      "name": "Copywriter"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Genera prompts visuales detallados para crear las imágenes o escenas de b-roll que acompañan el guion del video. Úsalo después de tener el guion listo. Devuelve prompts en inglés, listos para un generador de imágenes/video.",
+        "text": "Eres un director de arte especializado en crear prompts para generadores de imagen y video por IA (como Higgsfield, Midjourney, Flux, etc.), para videos cortos verticales sobre inteligencia artificial.\n\nContexto: el video tiene un avatar hablando a cámara (tu trabajo NO es describir al avatar). Tu trabajo es crear los visuales de apoyo / b-roll que se intercalan mientras el avatar narra, para ilustrar el guion y mantener la atención.\n\nA partir del guion que recibas, identifica los 3-5 momentos clave que necesitan un visual de apoyo y genera un prompt para cada uno.\n\nCada prompt debe:\n- Estar escrito en INGLÉS (los generadores funcionan mejor así).\n- Ser hiperrealista y cinematográfico, salvo que el tema pida otro estilo.\n- Incluir: sujeto principal, acción, entorno, iluminación, ángulo de cámara, estilo y mood.\n- Estar en formato vertical 9:16 (menciónalo).\n- Ser específico y visual, no abstracto. Nada de texto dentro de la imagen.\n\nReglas:\n- No describas al presentador/avatar; solo los visuales de fondo o apoyo.\n- Mantén coherencia visual entre los prompts (misma paleta/estilo general dentro del mismo video).\n- Evita elementos con copyright (logos, personajes conocidos, marcas).\n\nFormato de salida: una lista numerada, cada ítem con:\n- Momento del guion al que corresponde (breve).\n- El prompt completo en inglés.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        -2256,
+        1552
+      ],
+      "id": "69fdd353-eb9e-4b1d-90e3-c5ad9b529343",
+      "name": "Generador de prompts visuales"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Revisa el guion antes de producción para detectar afirmaciones falsas, exageradas, sin respaldo o médicamente riesgosas. Verifica datos dudosos buscando en internet. Úsalo siempre antes de pasar a producción, sobre todo en pilares \"mitos\" y \"negocios_salud\". Devuelve si el guion está aprobado o qué corregir.",
+        "text": "Eres un verificador de calidad y fact-checker riguroso para un canal sobre inteligencia artificial. Tu función es revisar el guion ANTES de que se produzca el video, para proteger la credibilidad del canal.\n\nTienes acceso a una herramienta de búsqueda web (Google/SerpApi). Úsala SIEMPRE que encuentres una afirmación verificable: datos, cifras, fechas, declaraciones atribuidas a empresas o personas, noticias recientes. No asumas desde tu memoria: verifica contra fuentes reales y actuales. Si una afirmación no se puede verificar, márcala como no confirmada.\n\nRevisa el guion que recibas y evalúa:\n\n1. VERACIDAD: ¿Hay afirmaciones falsas, datos inventados, cifras sin fundamento o declaraciones atribuidas a alguien que no las dijo? Busca en la web para confirmar las dudosas.\n2. EXAGERACIÓN: ¿Hay promesas infladas, hype vacío o afirmaciones absolutas que no se sostienen? El canal es crítico, no sensacionalista.\n3. RIESGO MÉDICO/LEGAL: si el tema toca salud, dinero o temas sensibles, ¿hay consejos peligrosos, diagnósticos o afirmaciones que podrían dañar o inducir a error? Máxima rigurosidad aquí.\n4. CLARIDAD: ¿El mensaje central es correcto, o hay errores conceptuales sobre cómo funciona la IA?\n\nSé especialmente estricto si el pilar es \"mitos\" o \"negocios_salud\".\n\nProceso:\n- Identifica las afirmaciones clave del guion.\n- Para cada afirmación verificable, usa la búsqueda web antes de juzgarla.\n- Basa tu veredicto en lo que encuentres, no en suposiciones.\n\nFormato de salida (devuelve exactamente esto):\n- VEREDICTO: APROBADO / APROBADO CON CAMBIOS / RECHAZADO\n- PROBLEMAS DETECTADOS: lista concreta de cada problema, citando la fuente que lo contradice cuando aplique (o \"ninguno\").\n- CORRECCIONES SUGERIDAS: qué cambiar exactamente para que el guion sea veraz y sólido (o \"ninguna\").\n\nNo reescribas el guion completo; solo señala y corrige lo necesario. Si tras verificar está todo bien, apruébalo sin inventar problemas.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        -3008,
+        1488
+      ],
+      "id": "57564ac8-2d3e-4b12-a259-473d363c53c0",
+      "name": "Revisor de calidad / fact-check",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "toolDescription": "Investiga noticias y tendencias recientes de inteligencia artificial en internet. Úsalo cuando necesites encontrar el tema del día para videos de pilar \"noticias\" o \"viral\". Devuelve 2-3 temas actuales con su fuente, relevancia y ángulo sugerido.",
+        "text": "Eres un investigador especializado en inteligencia artificial para un canal de contenido en redes sociales (shorts verticales). Tu trabajo es encontrar los temas más relevantes y con mayor potencial viral del momento, para que luego se conviertan en videos cortos.\n\n## QUÉ CUENTA COMO CONTENIDO DE IA RELEVANTE\nBusca y prioriza temas de estas categorías:\n- Lanzamientos y actualizaciones de modelos (OpenAI, Anthropic/Claude, Google/Gemini, Meta, xAI/Grok, DeepSeek, Mistral, modelos open-source).\n- Nuevas herramientas y features de IA (generación de video, imagen, voz, agentes, automatización, n8n, código).\n- Movimientos de industria: adquisiciones, inversiones, demandas, regulación, fugas de talento, drama entre empresas.\n- Aplicaciones prácticas: cómo la gente está usando IA para ganar dinero, productividad, negocios, automatizar trabajo.\n- Controversias y debates: afirmaciones exageradas, mitos, \"gurús\" vendiendo humo, predicciones fallidas, hype vs realidad.\n- Avances técnicos o papers que tengan impacto real y se puedan explicar de forma simple.\n\n## CRITERIOS DE BÚSQUEDA\n- Prioriza información de los últimos 1-3 días. Nada más viejo de 7 días salvo que siga siendo tendencia activa.\n- Verifica que sea real y esté respaldado por una fuente creíble (anuncio oficial, medio reconocido, cuenta verificada). Descarta rumores sin fuente.\n- Evita temas ya sobreexplotados o genéricos (\"qué es ChatGPT\"). Busca el ángulo fresco, el dato que poca gente conoce, o la noticia que acaba de romper.\n\n## CÓMO EVALUAR EL POTENCIAL DEL TEMA\nUn buen tema para short cumple al menos una de estas:\n- Genera sorpresa, indignación o curiosidad inmediata (gancho fuerte en los primeros 3 segundos).\n- Permite una postura crítica u opinión fuerte (desmentir, exponer, cuestionar).\n- Enseña algo útil y accionable en menos de 60 segundos.\n- Toca el bolsillo o el miedo del espectador (su trabajo, su dinero, quedarse atrás).\n\n## QUÉ DEBES DEVOLVER\nDevuelve entre 2 y 3 temas, cada uno con:\n1. **Titular interno** (una línea, de qué trata).\n2. **Fuente / dato clave** (qué pasó exactamente y de dónde viene la información).\n3. **Por qué es relevante ahora** (por qué este tema y no otro, qué lo hace viral o importante hoy).\n4. **Ángulo sugerido** (cómo abordarlo: noticia directa, crítica, enseñanza, mito a desmentir, etc.).\n\n## REGLAS\n- No inventes noticias, cifras ni declaraciones. Si no encuentras algo sólido y actual, dilo claramente en vez de rellenar.\n- No repitas temas que probablemente ya se cubrieron. Busca novedad.\n- Sé específico: nombres reales, empresas reales, fechas, cifras concretas. Nada vago.\n- Escribe en español, tono directo y sin relleno.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        -1984,
+        1504
+      ],
+      "id": "481a2b5b-3d50-4767-8a5c-f89cdc314979",
+      "name": "Buscador de noticias/tendencias"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "gpt-5"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -2592,
+        1248
+      ],
+      "id": "840ce717-360f-43cf-b4de-39edeef1b82e",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_ME",
+          "name": "Your openAiApi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "gpt-5"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -2000,
+        1680
+      ],
+      "id": "2d119b57-a957-475a-9240-6146a680b6b1",
+      "name": "OpenAI Chat Model3",
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_ME",
+          "name": "Your openAiApi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Usa esta herramienta para buscar en Google noticias y tendencias recientes sobre inteligencia artificial. Pásale una búsqueda específica sobre el tema de IA que necesitas investigar.",
+        "q": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Search_Query__q_', `Query de búsqueda en Google sobre IA. Usa términos específicos y en inglés para mejores resultados (ej: \"OpenAI new model release\", \"AI agents news\"). No busques términos genéricos.`, 'string') }}",
+        "location": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Location__location_', ``, 'string') }}",
+        "additionalFields": {
+          "google_domain": "google.com",
+          "gl": "us",
+          "as_qdr": "qdr:w",
+          "num": "10"
+        },
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-serpapi.serpApiTool",
+      "typeVersion": 1,
+      "position": [
+        -1840,
+        1680
+      ],
+      "id": "17565826-b177-4b57-9ac6-81f4e74129cc",
+      "name": "Google search in SerpApi",
+      "credentials": {
+        "serpApi": {
+          "id": "REPLACE_ME",
+          "name": "Your serpApi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "gpt-5"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -2784,
+        1680
+      ],
+      "id": "df707f40-3344-42a6-b31a-f6cfe77b55aa",
+      "name": "OpenAI Chat Model4",
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_ME",
+          "name": "Your openAiApi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "gpt-5"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -2464,
+        1728
+      ],
+      "id": "4d2b61ec-c0ad-434e-b643-ed1e21747ff5",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_ME",
+          "name": "Your openAiApi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "gpt-5"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -2256,
+        1696
+      ],
+      "id": "52831ea8-37e8-4156-a439-b89159898b28",
+      "name": "OpenAI Chat Model5",
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_ME",
+          "name": "Your openAiApi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "gpt-5"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -3024,
+        1680
+      ],
+      "id": "aabf9a9a-3475-4f41-bb2d-cd506a9da5d8",
+      "name": "OpenAI Chat Model6",
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_ME",
+          "name": "Your openAiApi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Busca en Google para verificar afirmaciones, datos, cifras o declaraciones del guion contra fuentes reales y actuales. Pásale la afirmación o dato específico que necesitas confirmar.",
+        "q": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Search_Query__q_', ``, 'string') }}",
+        "location": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Location__location_', ``, 'string') }}",
+        "additionalFields": {
+          "google_domain": "google.com",
+          "gl": "us",
+          "as_qdr": "qdr:m",
+          "num": "10"
+        },
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-serpapi.serpApiTool",
+      "typeVersion": 1,
+      "position": [
+        -2912,
+        1760
+      ],
+      "id": "d127d5f1-cc55-4d26-90c8-85c63eafd3ae",
+      "name": "Google search in SerpApi1",
+      "credentials": {
+        "serpApi": {
+          "id": "REPLACE_ME",
+          "name": "Your serpApi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"id\": \"001\",\n  \"pilar\": \"noticias\",\n  \"titulo_elegido\": \"ejemplo de título\",\n  \"titulos_alternativos\": [\"opción 2\", \"opción 3\"],\n  \"guion\": \"texto del guion completo\",\n  \"descripcion_youtube\": \"¿La IA va a quitarte el trabajo? Esto es lo que nadie te cuenta. En este video te explico la verdad detrás del hype. #IA #InteligenciaArtificial #Shorts #Tecnologia\",\n  \"tags\": \"inteligencia artificial, IA, tecnología, chatgpt, automatización, futuro, IA aplicada, negocios, noticias IA\",\n  \"prompts_visuales\": [\"cinematic shot of...\"],\n  \"fact_check\": { \"veredicto\": \"APROBADO\", \"notas\": \"verificado\" },\n  \"estado_sugerido\": \"listo_para_produccion\"\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -2464,
+        1152
+      ],
+      "id": "9d273bd7-8ebf-4f3c-95ce-22fd23a48d4e",
+      "name": "Structured Output Parser",
+      "retryOnFail": false,
+      "maxTries": 5
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Your content sheet",
+          "cachedResultUrl": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "estado",
+              "lookupValue": "publicado"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2848,
+        1104
+      ],
+      "id": "ed15d17d-cdb7-4825-b1bc-bc6fbb0b397d",
+      "name": "Temas publicados",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_ME",
+          "name": "Your googleSheetsOAuth2Api"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "apiKey",
+        "dimension": {
+          "dimensionValues": {
+            "width": 720,
+            "height": 1280
+          }
+        },
+        "videoInput": {
+          "videoInputValues": [
+            {
+              "characterType": "talking_photo",
+              "inputText": "={{ $json.output.guion }}",
+              "talkingPhotoId": "YOUR_HEYGEN_TALKING_PHOTO_ID",
+              "voiceId": "YOUR_HEYGEN_VOICE_ID"
+            }
+          ]
+        },
+        "additionalFields": {}
+      },
+      "type": "@heygenofficial/n8n-nodes-heygen-official.heygenNode",
+      "typeVersion": 1,
+      "position": [
+        -1744,
+        832
+      ],
+      "id": "16de9de8-bee1-4397-babf-ac7bda6ba3eb",
+      "name": "Create avatar video a video",
+      "credentials": {
+        "heyGenApi": {
+          "id": "REPLACE_ME",
+          "name": "Your heyGenApi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 60
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -1232,
+        1040
+      ],
+      "id": "a75a10de-71a3-4d29-a5dc-9b80efcae3d2",
+      "name": "Wait3"
+    },
+    {
+      "parameters": {
+        "authentication": "apiKey",
+        "operation": "getVideoStatus",
+        "videoId": "={{ $('HTTP Request2').item.json.data.video_id }}"
+      },
+      "type": "@heygenofficial/n8n-nodes-heygen-official.heygenNode",
+      "typeVersion": 1,
+      "position": [
+        -1024,
+        1056
+      ],
+      "id": "a4ee54d3-7355-46f8-bb7f-5cc48204ef53",
+      "name": "Get a video",
+      "credentials": {
+        "heyGenApi": {
+          "id": "REPLACE_ME",
+          "name": "Your heyGenApi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b4d37095-24a9-4631-b002-b0936026b36c",
+              "leftValue": "={{ $json.data.status }}",
+              "rightValue": "completed",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -816,
+        1056
+      ],
+      "id": "e63349ae-6808-4f51-8c45-5a7aa0723778",
+      "name": "If",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "url": "=https://api.creatomate.com/v1/renders/{{ $('Edit + Render Video').item.json.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_CREATOMATE_API_KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        752,
+        1184
+      ],
+      "id": "8668e534-d8bb-4399-8af5-a120d330b44b",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "50542c80-a1c6-42e8-ae54-78eda8fef6e1",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "succeeded",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        944,
+        1184
+      ],
+      "id": "accb16fe-4b4d-49da-90ef-4e6f3541acbb",
+      "name": "If1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "upload",
+        "title": "={{ $('AI Agent').item.json.output.titulo_elegido }}",
+        "regionCode": "CO",
+        "categoryId": "28",
+        "options": {
+          "description": "=  {{ $('AI Agent').item.json.output.descripcion_youtube }}",
+          "privacyStatus": "public",
+          "selfDeclaredMadeForKids": false,
+          "tags": "  {{ $('AI Agent').item.json.output.tags }}"
+        }
+      },
+      "type": "n8n-nodes-base.youTube",
+      "typeVersion": 1,
+      "position": [
+        1648,
+        1328
+      ],
+      "id": "fe523035-3347-49a9-8380-c3380e9b0569",
+      "name": "Upload a video",
+      "alwaysOutputData": true,
+      "credentials": {
+        "youTubeOAuth2Api": {
+          "id": "REPLACE_ME",
+          "name": "Your youTubeOAuth2Api"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1104,
+        1200
+      ],
+      "id": "20f91336-4428-4498-a042-db8113990336",
+      "name": "HTTP Request1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -2544,
+        1360
+      ],
+      "id": "8c90017d-a5a1-46b3-b26e-86be7a0f3e1c",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_ME",
+          "name": "Your openAiApi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.heygen.com/v2/video/generate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"YOUR_HEYGEN_AVATAR_ID\",\n        \"avatar_style\": \"normal\"\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": {{ JSON.stringify($json.output.guion) }},\n        \"voice_id\": \"YOUR_HEYGEN_VOICE_ID\"\n      }\n    }\n  ],\n  \"dimension\": { \"width\": 720, \"height\": 1280 }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1584,
+        1168
+      ],
+      "id": "382c3886-ccdb-42d0-97fb-1cc90d496580",
+      "name": "HTTP Request2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_ME",
+          "name": "Your httpHeaderAuth"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Temas publicados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item List Output Parser": {
+      "ai_outputParser": [
+        []
+      ]
+    },
+    "DIsparador por horas": {
+      "main": [
+        [
+          {
+            "node": "Calcular Pilar del Dia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit + Render Video": {
+      "main": [
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calcular Pilar del Dia": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generador de titulos": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copywriter": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generador de prompts visuales": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Revisor de calidad / fact-check": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscador de noticias/tendencias": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Buscador de noticias/tendencias",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google search in SerpApi": {
+      "ai_tool": [
+        [
+          {
+            "node": "Buscador de noticias/tendencias",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generador de titulos",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Copywriter",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model5": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generador de prompts visuales",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model6": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Revisor de calidad / fact-check",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google search in SerpApi1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Revisor de calidad / fact-check",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Temas publicados": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create avatar video a video": {
+      "main": [
+        []
+      ]
+    },
+    "Wait3": {
+      "main": [
+        [
+          {
+            "node": "Get a video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a video": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit + Render Video",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload a video": {
+      "main": [
+        [
+          {
+            "node": "Update Gsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Upload a video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Wait3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}
