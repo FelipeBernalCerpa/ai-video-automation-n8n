@@ -20,8 +20,12 @@ An n8n workflow that produces and publishes short vertical videos about AI on it
 
 ## Set it up
 
-Import `content-creation-workflow.json` into n8n. Create your own credentials for Google Sheets, OpenAI, SerpApi, HeyGen, YouTube and a Header Auth for HeyGen. Replace every placeholder in the file: `YOUR_GOOGLE_SHEET_ID`, `YOUR_CREATOMATE_API_KEY`, `YOUR_HEYGEN_AVATAR_ID`, `YOUR_HEYGEN_TALKING_PHOTO_ID` and `YOUR_HEYGEN_VOICE_ID`. Keep API keys in n8n credentials, never inside a node.
+Import `Content_Creation_workflow.json` into n8n. Create your own credentials for Google Sheets, OpenAI, SerpApi, HeyGen, YouTube and a Header Auth for HeyGen. Replace every placeholder in the file: `YOUR_GOOGLE_SHEET_ID`, `YOUR_CREATOMATE_API_KEY`, `YOUR_HEYGEN_AVATAR_ID`, `YOUR_HEYGEN_TALKING_PHOTO_ID` and `YOUR_HEYGEN_VOICE_ID`. Keep API keys in n8n credentials, never inside a node.
 
 ## Notes
 
 The agent prompts are in Spanish because the channel is in Spanish. The workflow publishes without human review, so I recommend setting the YouTube privacy to private or adding an approval step before you run it.
+
+## License
+
+MIT. See the LICENSE file.
